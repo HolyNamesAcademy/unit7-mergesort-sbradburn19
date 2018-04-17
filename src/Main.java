@@ -44,7 +44,7 @@ public class Main {
      * @param arrayList the ArrayList to be sorted. arrayList cannot contain duplicates
      */
     public static void mergeSort(ArrayList<Integer> arrayList) {
-        throw new UnsupportedOperationException("mergeSort() has not been implemented yet");
+
     }
 
     /**
@@ -57,7 +57,10 @@ public class Main {
      * @param hi the index of the last element in the range + 1.
      */
     public static void sort(ArrayList<Integer> arrayList, int lo, int hi) {
-        throw new UnsupportedOperationException("sort() has not been implemented yet");
+        if(hi - lo <= 1)
+            //end it somehow
+
+        sort(arrayList, lo, hi/2);
     }
 
     /**
@@ -71,6 +74,17 @@ public class Main {
      * @param hi the index of the last element in the second range + 1.
      */
     public static void merge(ArrayList<Integer> arrayList, int lo, int mid, int hi) {
-        throw new UnsupportedOperationException("merge() has not been implemented yet");
+        ArrayList<Integer> sorting = new ArrayList<>();
+        int middleCounter = mid;
+        for(int i = lo; i < mid; i++)
+        {
+            if(arrayList.get(i) <= arrayList.get(middleCounter+i))
+                sorting.add(arrayList.get(i));
+            else
+                sorting.add(arrayList.get(middleCounter+i));
+        }
+        for(int j = 0; j < arrayList.size(); j++)
+            arrayList.add(j, sorting.get(j));
+
     }
 }
