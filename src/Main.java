@@ -57,8 +57,8 @@ public class Main {
      * @param hi the index of the last element in the range + 1.
      */
     public static void sort(ArrayList<Integer> arrayList, int lo, int hi) {
-        if(hi - lo <= 1)
-            //end it somehow
+        if(arrayList.size() <= 1)
+            return;
 
         sort(arrayList, lo, hi/2);
     }
@@ -76,15 +76,34 @@ public class Main {
     public static void merge(ArrayList<Integer> arrayList, int lo, int mid, int hi) {
         ArrayList<Integer> sorting = new ArrayList<>();
         int middleCounter = mid;
-        for(int i = lo; i < mid; i++)
+        //for(int i = lo; i < mid + 1; i++)
+        //{
+          //  for (int j = 1; j < mid; j++) {
+            // if (arrayList.get(i) < arrayList.get(middleCounter + j)) {
+              //   sorting.add(arrayList.get(i));
+                // i++;
+                 //j--;
+             //}
+             //else
+               // sorting.add(arrayList.get(middleCounter + j));
+            //}
+        //}
+
+
+        while(sorting.size() < arrayList.size())
         {
-            if(arrayList.get(i) <= arrayList.get(middleCounter+i))
-                sorting.add(arrayList.get(i));
+            if(arrayList.get(lo) < arrayList.get(mid))
+            {
+                sorting.add(arrayList.get(lo));
+                lo++;
+            }
             else
-                sorting.add(arrayList.get(middleCounter+i));
+            {
+                sorting.add(arrayList.get(mid));
+                mid++;
+            }
         }
         for(int j = 0; j < arrayList.size(); j++)
-            arrayList.add(j, sorting.get(j));
-
+           arrayList.add(j, sorting.get(j));
     }
 }
