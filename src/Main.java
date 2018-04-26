@@ -45,6 +45,9 @@ public class Main {
      */
     public static void mergeSort(ArrayList<Integer> arrayList) {
 
+        sort(arrayList, 0, arrayList.size());
+        merge(arrayList,0, arrayList.size()/2, arrayList.size());
+
     }
 
     /**
@@ -57,10 +60,14 @@ public class Main {
      * @param hi the index of the last element in the range + 1.
      */
     public static void sort(ArrayList<Integer> arrayList, int lo, int hi) {
-        if(arrayList.size() <= 1)
+        if(hi - lo <= 1)
             return;
 
-        sort(arrayList, lo, hi/2);
+        int mid = (hi + lo) / 2;
+        sort(arrayList, lo, mid);
+        sort(arrayList, mid, hi);
+        merge(arrayList, lo, mid, hi);
+
     }
 
     /**
@@ -75,7 +82,7 @@ public class Main {
      */
     public static void merge(ArrayList<Integer> arrayList, int lo, int mid, int hi) {
         ArrayList<Integer> sorting = new ArrayList<>();
-        int middleCounter = mid;
+        int i = lo;
         //for(int i = lo; i < mid + 1; i++)
         //{
           //  for (int j = 1; j < mid; j++) {
@@ -88,22 +95,36 @@ public class Main {
                // sorting.add(arrayList.get(middleCounter + j));
             //}
         //}
-
-
-        while(sorting.size() < arrayList.size())
+        int j = mid;
+        while(i < mid || j < hi)
         {
-            if(arrayList.get(lo) < arrayList.get(mid))
+            if(j == hi)
             {
-                sorting.add(arrayList.get(lo));
-                lo++;
+                sorting.add(arrayList.get(i));
+                i++;
+            }
+            else if(i == mid)
+            {
+                sorting.add(arrayList.get(j));
+                j++;
+            }
+            else if(arrayList.get(j) < arrayList.get(i))
+            {
+                sorting.add(arrayList.get(j));
+                j++;
             }
             else
             {
-                sorting.add(arrayList.get(mid));
-                mid++;
+                sorting.add(arrayList.get(i));
+                i++;
             }
         }
-        for(int j = 0; j < arrayList.size(); j++)
-           arrayList.add(j, sorting.get(j));
+        for (int index = 0; index < sorting.size(); index++) {
+
+            arrayList.set(index + lo, sorting.get(index));
+
+        }
     }
-}
+
+    }
+
